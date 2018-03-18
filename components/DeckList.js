@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList
 } from 'react-native';
+import { NavigationOptions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { getDecks } from '../utils/api';
 import { fetchDecks } from '../actions';
@@ -14,8 +15,9 @@ class DeckList extends Component {
   componentDidMount() {
     this.props.fetchDecks();
   }
-  goToCardPage = () => {
-    console.log("card page")
+  goToDeck = () => {
+    console.log("this.props.navigation", this.props.navigation.navigate('Deck'))
+    this.props.navigation.navigate('Deck')
   }
   renderDeckList() {
     if (Object.keys(this.props.decks).length === 0) {
@@ -30,8 +32,8 @@ class DeckList extends Component {
           renderItem={({item}) => {
             console.log("item", item)
             return (
-              <TouchableOpacity onPress={() => this.goToCardPage()}>
-                <Text>{this.props.decks[item].title}</Text>
+              <TouchableOpacity onPress={() => this.goToDeck()}>
+                <Text>{this.props.decks[item].title} ({this.props.decks[item].questions.length} cards)</Text>
               </TouchableOpacity>
             )
           }}
@@ -42,7 +44,7 @@ class DeckList extends Component {
 
   }
   render() {
-    console.log("props: ", Object.keys(this.props.decks))
+    console.log("DECKLIST props: ", this.props)
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>DeckList</Text>

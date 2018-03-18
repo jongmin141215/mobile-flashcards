@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducers';
 import DeckList from './components/DeckList';
+import Deck from './components/Deck';
 import AddDeck from './components/AddDeck';
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -17,12 +18,11 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <Tabs />
+        <MainNavigator />
       </Provider>
     );
   }
 }
-
 const Tabs = TabNavigator({
   DeckList: {
     screen: DeckList,
@@ -38,5 +38,16 @@ const Tabs = TabNavigator({
     navigationOptions: {
       tabBarLabel: 'Add Deck'
     }
+  }
+})
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  DeckList: {
+    screen: DeckList
+  },
+  Deck: {
+    screen: Deck
   }
 })
