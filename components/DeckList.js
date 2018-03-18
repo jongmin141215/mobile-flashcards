@@ -15,24 +15,20 @@ class DeckList extends Component {
   componentDidMount() {
     this.props.fetchDecks();
   }
-  goToDeck = () => {
-    console.log("this.props.navigation", this.props.navigation.navigate('Deck'))
-    this.props.navigation.navigate('Deck')
+  goToDeck = (item) => {
+    this.props.navigation.navigate('Deck', { id: item })
   }
   renderDeckList() {
     if (Object.keys(this.props.decks).length === 0) {
-      console.log("HIHIHIHIHIHIHIHHIHIHIHIHIHIHIHIH")
       return <Text>Hi</Text>
     } else {
-      console.log("ELSELSELSELSELSELSELSELSEL")
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <FlatList
           data={Object.keys(this.props.decks)}
           renderItem={({item}) => {
-            console.log("item", item)
             return (
-              <TouchableOpacity onPress={() => this.goToDeck()}>
+              <TouchableOpacity onPress={() => this.goToDeck(item)}>
                 <Text>{this.props.decks[item].title} ({this.props.decks[item].questions.length} cards)</Text>
               </TouchableOpacity>
             )

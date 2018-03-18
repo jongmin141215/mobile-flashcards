@@ -13,7 +13,16 @@ export function getDecks() {
 export function getDeck(id) {
   return AsyncStorage.getItem(MOBILE_FLASHCARDS_KEY)
     .then((decks) => {
-      decks.find((deck) => deck.id === id)
+      console.log("find deck", decks)
+      const parsedDecks = JSON.parse(decks)
+      console.log("parsedDecks", JSON.parse(decks))
+      const deckTitle = Object.keys(parsedDecks).find((deckTitle) => {
+        return deckTitle === id
+      })
+      return parsedDecks[deckTitle];
+
+      // console.log("FIND DECK: ", decks.find((deck) => deck.id === id))
+      // return decks.find((deck) => deck.id === id)
     })
 }
 

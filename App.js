@@ -44,9 +44,6 @@ const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs
   },
-  DeckList: {
-    screen: DeckList
-  },
   Deck: {
     screen: Deck
   }
