@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -6,15 +7,16 @@ import {
   TouchableOpacity,
   TextInput
  } from 'react-native';
- import { saveDeckTitle } from '../utils/api';
+ import { addDeck } from '../actions';
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
   state = {
     deckTitle: ''
   }
   onAddDeck = (deckTitle) => {
-    console.log("deck title: ",deckTitle)
-    saveDeckTitle(deckTitle);
+    console.log("add deck props: ",this.props)
+
+    this.props.addDeck(deckTitle);
   }
   render() {
     return (
@@ -32,3 +34,4 @@ export default class AddDeck extends Component {
     );
   }
 }
+export default connect(null, { addDeck })(AddDeck);

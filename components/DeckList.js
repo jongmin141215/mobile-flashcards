@@ -10,9 +10,6 @@ import { getDecks } from '../utils/api';
 import { fetchDecks } from '../actions';
 
 class DeckList extends Component {
-  state = {
-    decks: []
-  }
   componentDidMount() {
     this.props.fetchDecks();
   }
