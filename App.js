@@ -9,6 +9,7 @@ import reducer from './reducers';
 import DeckList from './components/DeckList';
 import Deck from './components/Deck';
 import AddDeck from './components/AddDeck';
+import AddCard from './components/AddCard';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -46,5 +47,8 @@ const MainNavigator = StackNavigator({
   },
   Deck: {
     screen: Deck
+  },
+  AddCard: {
+    screen: AddCard
   }
 })
