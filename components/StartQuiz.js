@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 class StartQuiz extends Component {
   state = {
     index: 0,
+    correct: 0,
     showAnswer: false
+  }
+  onRestartQuiz = (newState) => {
+    console.log("onRestartQuiz", newState)
+    this.setState(newState)
   }
   showQuestionAnswerToggle = () => {
     this.setState({showAnswer: !this.state.showAnswer})
@@ -33,27 +38,35 @@ class StartQuiz extends Component {
       )
     }
   }
+  markScore = (correct) => {
+    this.setState((prevState, props) => ({ correct: prevState.correct + correct}), () => {
+      this.toNextCard()
+    })
+
+
+  }
   toNextCard = () => {
     if (this.state.index + 1 === this.props.deck.questions.length) {
-      this.props.navigation.navigate('Result');
+      this.props.navigation.navigate('Result', { score: this.state.correct, onRestartQuiz: this.onRestartQuiz });
     } else {
       this.setState({index: this.state.index + 1})
     }
   }
 
   render() {
-    console.log("Start quiz (decks): ", this.props)
+    console.log("Start quiz (decks): ", this.state)
     return (
       <View>
       <Text>({this.state.index + 1}/{this.props.deck.questions.length})</Text>
         {this.displayQuestionOrAnswer()}
 
-        <TouchableOpacity onPress={this.toNextCard}>
+        <TouchableOpacity onPress={() => this.markScore(1)}>
           <Text>Correct</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.toNextCard}>
+        <TouchableOpacity onPress={() => this.markScore(0)}>
           <Text>Incorrect</Text>
         </TouchableOpacity>
+        <Text>{this.state.correct}</Text>
       </View>
     );
   }
