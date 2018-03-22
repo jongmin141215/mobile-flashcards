@@ -20,9 +20,8 @@ class AddDeck extends Component {
 
     this.props.saveDeck(deckTitle)
       .then(() => {
-
         this.props.navigation.navigate('DeckList')
-      } )
+      })
 
 
     AsyncStorage.getItem("MobileFlashcards")

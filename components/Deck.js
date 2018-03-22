@@ -11,7 +11,10 @@ class Deck extends Component {
     this.props.fetchDeck(this.props.navigation.state.params.id);
   }
   goToAddCard = () => {
-    this.props.navigation.navigate('AddCard')
+    this.props.navigation.navigate('AddCard');
+  }
+  goToStartQuiz = () => {
+    this.props.navigation.navigate('StartQuiz');
   }
   render() {
     console.log("DECK PROPS: ", this.props)
@@ -25,7 +28,7 @@ class Deck extends Component {
           <TextButton style={{}} onPress={this.goToAddCard}>
             Add Card
           </TextButton>
-          <TextButton style={{backgroundColor: 'black', color: 'white'}}>
+          <TextButton style={{backgroundColor: 'black', color: 'white'}} onPress={this.goToStartQuiz}>
             Start Quiz
           </TextButton>
         </View>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { saveCard } from '../actions';
+import { saveCard, fetchDecks } from '../actions';
 
 class AddCard extends Component {
   state = {
@@ -10,7 +10,8 @@ class AddCard extends Component {
   }
   onAddCard = (title, card) => {
     this.props.saveCard(title, card)
-      .then(() => this.props.navigation.navigate('DeckList'));
+    // ideally go back to the previous page. Currently the number of card is not being updated
+      .then(() => this.props.navigation.popToTop());
   }
   render() {
     console.log("ADD Card PROPS: ", this.props)
@@ -49,4 +50,4 @@ const mapStateToProps = (state) => {
     deck: state.deck
   }
 }
-export default connect(mapStateToProps, { saveCard })(AddCard);
+export default connect(mapStateToProps, { saveCard, fetchDecks })(AddCard);

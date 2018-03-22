@@ -10,6 +10,8 @@ import DeckList from './components/DeckList';
 import Deck from './components/Deck';
 import AddDeck from './components/AddDeck';
 import AddCard from './components/AddCard';
+import StartQuiz from './components/StartQuiz';
+import Result from './components/Result';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -50,5 +52,11 @@ const MainNavigator = StackNavigator({
   },
   AddCard: {
     screen: AddCard
+  },
+  StartQuiz: {
+    screen: StartQuiz
+  },
+  Result: {
+    screen: Result
   }
 })
