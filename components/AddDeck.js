@@ -5,9 +5,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  AsyncStorage
  } from 'react-native';
- import { addDeck } from '../actions';
+ import { saveDeck } from '../actions';
+ import { saveDeckTitle } from '../utils/api';
 
 class AddDeck extends Component {
   state = {
@@ -16,7 +18,18 @@ class AddDeck extends Component {
   onAddDeck = (deckTitle) => {
     console.log("add deck props: ",this.props)
 
-    this.props.addDeck(deckTitle);
+    this.props.saveDeck(deckTitle)
+      .then(() => {
+
+        this.props.navigation.navigate('DeckList')
+      } )
+
+
+    AsyncStorage.getItem("MobileFlashcards")
+      .then(item => {
+        console.log("saveDeckTitle", JSON.stringify(item))
+      })
+
   }
   render() {
     return (
@@ -34,4 +47,4 @@ class AddDeck extends Component {
     );
   }
 }
-export default connect(null, { addDeck })(AddDeck);
+export default connect(null, { saveDeck })(AddDeck);

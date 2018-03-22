@@ -13,7 +13,8 @@ import { fetchDecks } from '../actions';
 
 class DeckList extends Component {
   componentDidMount() {
-    this.props.fetchDecks();
+    console.log("component did mount")
+    this.props.fetchDecks()
   }
   goToDeck = (item) => {
     this.props.navigation.navigate('Deck', { id: item })

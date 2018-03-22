@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { saveCard } from '../actions';
 
 class AddCard extends Component {
   state = {
     question: '',
     answer: ''
   }
-  onAddCard = ({ deck, question, answer }) => {
-    console.log("deck", deck);
-    console.log("question", question);
-    console.log("answer", answer);
+  onAddCard = (title, card) => {
+    this.props.saveCard(title, card)
+      .then(() => this.props.navigation.navigate('DeckList'));
   }
   render() {
     console.log("ADD Card PROPS: ", this.props)
@@ -35,8 +35,9 @@ class AddCard extends Component {
             onChangeText={(answer) => this.setState({ answer })}
             value={this.state.answer}
           />
+          <Text>{JSON.stringify(this.props.deck)}</Text>
         </View>
-        <TouchableOpacity onPress={() => this.onAddCard({deck: this.props.deck, question: this.state.question, answer: this.state.answer})}>
+        <TouchableOpacity onPress={() => this.onAddCard(this.props.deck.title, { question: this.state.question, answer: this.state.answer })}>
           <Text>Add Card</Text>
         </TouchableOpacity>
       </View>
@@ -48,4 +49,4 @@ const mapStateToProps = (state) => {
     deck: state.deck
   }
 }
-export default connect(mapStateToProps)(AddCard);
+export default connect(mapStateToProps, { saveCard })(AddCard);
