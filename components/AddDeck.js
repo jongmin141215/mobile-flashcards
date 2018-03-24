@@ -10,25 +10,18 @@ import {
  } from 'react-native';
  import { saveDeck } from '../actions';
  import { saveDeckTitle } from '../utils/api';
+ import { NavigationActions } from 'react-navigation';
 
 class AddDeck extends Component {
   state = {
     deckTitle: ''
   }
   onAddDeck = (deckTitle) => {
-    console.log("add deck props: ",this.props)
-
     this.props.saveDeck(deckTitle)
       .then(() => {
-        this.props.navigation.navigate('DeckList')
+        this.props.navigation.navigate('Deck', { id: deckTitle })
+        this.setState({ deckTitle: ''})
       })
-
-
-    AsyncStorage.getItem("MobileFlashcards")
-      .then(item => {
-        console.log("saveDeckTitle", JSON.stringify(item))
-      })
-
   }
   render() {
     return (
@@ -38,7 +31,6 @@ class AddDeck extends Component {
           style={{borderColor: 'gray', height: 40, borderWidth: 1, width: 200}}
           onChangeText={(deckTitle) => this.setState({ deckTitle })}
           value={this.state.deckTitle} />
-        <Text>{this.state.deckTitle}</Text>
         <TouchableOpacity onPress={() => this.onAddDeck(this.state.deckTitle)}>
           <Text>Add Deck</Text>
         </TouchableOpacity>

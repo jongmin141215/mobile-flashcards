@@ -2,23 +2,31 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { saveCard, fetchDecks } from '../actions';
+import TextButton from './TextButton';
 
 class AddCard extends Component {
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    addCard: false
   }
   onAddCard = (title, card) => {
     this.props.saveCard(title, card)
-    // ideally go back to the previous page. Currently the number of card is not being updated
-      .then(() => this.props.navigation.popToTop());
+      .then(() => this.goBackToDeck())
+  }
+  goBackToDeck = () => {
+    const { navigation } = this.props;
+    navigation.dispatch({
+      routeName: 'Deck',
+      type: 'GoBackToDeck'
+    })
+    navigation.state.params.onGoBackToDeck({ addCard: true })
   }
   render() {
-    console.log("ADD Card PROPS: ", this.props)
     return (
-      <View>
+      <View style={styles.container}>
         <View>
-          <Text>
+          <Text style={styles.text}>
             Question
           </Text>
           <TextInput
@@ -28,7 +36,7 @@ class AddCard extends Component {
           />
         </View>
         <View>
-          <Text>
+          <Text style={styles.text}>
             Answer
           </Text>
           <TextInput
@@ -36,15 +44,33 @@ class AddCard extends Component {
             onChangeText={(answer) => this.setState({ answer })}
             value={this.state.answer}
           />
-          <Text>{JSON.stringify(this.props.deck)}</Text>
         </View>
-        <TouchableOpacity onPress={() => this.onAddCard(this.props.deck.title, { question: this.state.question, answer: this.state.answer })}>
+        <TextButton style={{marginTop: 20}} onPress={() => this.onAddCard(this.props.deck.title, { question: this.state.question, answer: this.state.answer })}>
           <Text>Add Card</Text>
-        </TouchableOpacity>
+        </TextButton>
       </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 100
+  },
+  text: {
+    fontSize: 15,
+    margin: 3,
+    color: '#121212'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ababab',
+    height: 40,
+    width: 200,
+    padding: 5
+  }
+})
 const mapStateToProps = (state) => {
   return {
     deck: state.deck

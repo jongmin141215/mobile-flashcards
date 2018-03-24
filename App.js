@@ -12,13 +12,15 @@ import AddDeck from './components/AddDeck';
 import AddCard from './components/AddCard';
 import StartQuiz from './components/StartQuiz';
 import Result from './components/Result';
+import { setLocalNotification } from './utils/helpers';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
-    console.log("store.getState(): ",store.getState())
-
     return (
       <Provider store={store}>
         <MainNavigator />
@@ -30,6 +32,7 @@ const Tabs = TabNavigator({
   DeckList: {
     screen: DeckList,
     navigationOptions: {
+      title: 'Decks',
       tabBarLabel: 'Decks',
       style: {
         backgroundColor: 'red'
@@ -39,6 +42,7 @@ const Tabs = TabNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
+      title: 'Add Deck',
       tabBarLabel: 'Add Deck'
     }
   }
@@ -51,27 +55,36 @@ const MainNavigator = StackNavigator({
     screen: Deck
   },
   AddCard: {
-    screen: AddCard
+    screen: AddCard,
+    navigationOptions: {
+      title: 'Add Card'
+    }
   },
   StartQuiz: {
-    screen: StartQuiz
+    screen: StartQuiz,
+    navigationOptions: {
+      title: 'Quiz'
+    }
   },
   Result: {
-    screen: Result
+    screen: Result,
+    navigationOptions: {
+      title: 'Results'
+    }
   }
 })
 
 const defaultGetStateForAction = MainNavigator.router.getStateForAction;
 MainNavigator.router.getStateForAction = (action, state) => {
-    if (state && action.type === 'GoBackToDeck') {
-        let index = state.routes.findIndex((item) => {
-            return item.routeName === action.routeName
-        });
-        const routes = state.routes.slice(0, index+1);
-        return {
-            routes,
-            index
-        };
-    }
-    return defaultGetStateForAction(action, state);
+  if (state && action.type === 'GoBackToDeck') {
+      let index = state.routes.findIndex((item) => {
+        return item.routeName === action.routeName
+      });
+      const routes = state.routes.slice(0, index+1);
+      return {
+        routes,
+        index
+      };
+  }
+  return defaultGetStateForAction(action, state);
 };
