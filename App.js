@@ -4,6 +4,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 import reducer from './reducers';
 import DeckList from './components/DeckList';
@@ -34,17 +35,24 @@ const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Decks',
       tabBarLabel: 'Decks',
-      style: {
-        backgroundColor: 'red'
-      }
+      tabBarIcon: () => <MaterialCommunityIcons name='cards' size={30} style={{marginBottom: -10}} />
     }
   },
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
       title: 'Add Deck',
-      tabBarLabel: 'Add Deck'
+      tabBarLabel: 'Add Deck',
+      tabBarIcon: () => <Ionicons name='ios-create' size={30} style={{marginBottom: -10}} />
     }
+  }
+}, {
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 15,
+      marginBottom: -20
+    },
+    activeTintColor: '#000'
   }
 })
 const MainNavigator = StackNavigator({

@@ -23,9 +23,7 @@ class Deck extends Component {
     this.props.navigation.navigate('AddCard', { onGoBackToDeck: this.onGoBackToDeck });
   }
   goToStartQuiz = () => {
-    console.log("hi")
     this.props.navigation.navigate('StartQuiz');
-    console.log("bye")
   }
   render() {
     if (Object.keys(this.props.deck).length === 0) {
@@ -71,7 +69,7 @@ styles = StyleSheet.create({
     marginTop: 5,
   },
   body: {
-    marginTop: 80
+    marginTop: 50
   },
   button: {
     borderWidth: 1,

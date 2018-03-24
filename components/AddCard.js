@@ -8,11 +8,26 @@ class AddCard extends Component {
   state = {
     question: '',
     answer: '',
-    addCard: false
+    addCard: false,
+    questionError: null,
+    answerError: null
   }
   onAddCard = (title, card) => {
-    this.props.saveCard(title, card)
-      .then(() => this.goBackToDeck())
+    if (card.question === '' ) {
+      this.setState({questionError: 'Question is required.'})
+    } else {
+      this.setState({questionError: null})
+    }
+    if (card.answer === '') {
+      this.setState({answerError: 'Answer is required.'})
+    } else {
+        this.setState({answerError: null})
+    }
+    if (card.answer !== '' && card.question !== '') {
+      this.props.saveCard(title, card)
+        .then(() => this.goBackToDeck())
+      this.setState({questionError: null, answerError: null})
+    }
   }
   goBackToDeck = () => {
     const { navigation } = this.props;
@@ -30,20 +45,22 @@ class AddCard extends Component {
             Question
           </Text>
           <TextInput
-            style={{borderColor: 'gray', height: 40, borderWidth: 1, width: 200}}
+            style={styles.input}
             onChangeText={(question) => this.setState({ question })}
             value={this.state.question}
           />
+          {this.state.questionError && <Text style={{color: 'red'}}>{this.state.questionError}</Text>}
         </View>
         <View>
           <Text style={styles.text}>
             Answer
           </Text>
           <TextInput
-            style={{borderColor: 'gray', height: 40, borderWidth: 1, width: 200}}
+            style={styles.input}
             onChangeText={(answer) => this.setState({ answer })}
             value={this.state.answer}
           />
+          {this.state.answerError && <Text style={{color: 'red'}}>{this.state.answerError}</Text>}
         </View>
         <TextButton style={{marginTop: 20}} onPress={() => this.onAddCard(this.props.deck.title, { question: this.state.question, answer: this.state.answer })}>
           <Text>Add Card</Text>
@@ -60,7 +77,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    margin: 3,
+    marginBottom: 5,
+    marginTop: 5,
     color: '#121212'
   },
   input: {

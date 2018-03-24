@@ -35,15 +35,17 @@ class DeckList extends Component {
       return <Text>Create flashcards by clicking “Add Deck”.</Text>
     } else {
       return (
-        <View>
+        <View style={styles.container}>
           <FlatList
             data={Object.keys(this.props.decks)}
             keyExtractor={(item, index) => index}
+            style={styles.deckList}
             renderItem={({item}) => {
               return (
                 <Animated.View style={{transform: [{scale: this.state.bounceValue}]}}>
-                  <TouchableOpacity onPress={() => this.goToDeck(item)}>
-                    <Text>{this.props.decks[item].title} ({this.props.decks[item].questions.length} cards)</Text>
+                  <TouchableOpacity onPress={() => this.goToDeck(item)} style={styles.deck}>
+                    <Text style={styles.titleText}>{this.props.decks[item].title}</Text>
+                    <Text style={styles.cardNumberText}>({this.props.decks[item].questions.length} cards)</Text>
                   </TouchableOpacity>
                 </Animated.View>
               )
@@ -56,19 +58,40 @@ class DeckList extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         {this.renderDeckList()}
       </View>
     );
   }
 }
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30
+    marginTop: 20
+  },
+  deckList: {
+    width: '100%'
+  },
+  deck: {
+    margin: 20,
+    padding: 20,
+    borderColor: '#888',
+    backgroundColor: '#fff',
+      shadowColor: '#ddd',
+      shadowOpacity: 0.8,
+       shadowRadius: 2,
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    marginBottom: 10
+  },
+  titleText: {
+    fontSize: 25
+  },
+  cardNumberText: {
+    fontSize: 15,
+    color: "#888"
   }
 })
 
