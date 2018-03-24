@@ -20,7 +20,6 @@ class AddDeck extends Component {
   }
   onAddDeck = (deckTitle) => {
     if (deckTitle === '') {
-      console.log("decktitle is empty")
       this.setState({titleError: 'Deck title is required.'})
     } else {
       this.props.saveDeck(deckTitle)
@@ -30,9 +29,9 @@ class AddDeck extends Component {
         })
       this.setState({titleError: null})
     }
-
   }
   render() {
+    const { deckTitle, titleError } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Add a new deck of flashcards!</Text>
@@ -40,9 +39,9 @@ class AddDeck extends Component {
           style={styles.input}
           onChangeText={(deckTitle) => this.setState({ deckTitle })}
           placeholder='Deck name'
-          value={this.state.deckTitle} />
-        {this.state.titleError && <Text style={{color: 'red'}}>{this.state.titleError}</Text>}
-        <TextButton style={{marginTop: 20}} onPress={() => this.onAddDeck(this.state.deckTitle)}>
+          value={deckTitle} />
+        {titleError && <Text style={{color: 'red'}}>{titleError}</Text>}
+        <TextButton style={{marginTop: 20}} onPress={() => this.onAddDeck(deckTitle)}>
           <Text>Add Deck</Text>
         </TextButton>
       </View>

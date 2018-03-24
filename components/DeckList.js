@@ -5,10 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  Animated,
-  TouchableWithoutFeedback
+  Animated
 } from 'react-native';
-import { NavigationOptions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { getDecks } from '../utils/api';
 import { fetchDecks } from '../actions';
@@ -31,21 +29,22 @@ class DeckList extends Component {
     }, 300)
   }
   renderDeckList() {
-    if (Object.keys(this.props.decks).length === 0) {
+    const { decks } = this.props;
+    if (Object.keys(decks).length === 0) {
       return <Text>Create flashcards by clicking “Add Deck”.</Text>
     } else {
       return (
         <View style={styles.container}>
           <FlatList
-            data={Object.keys(this.props.decks)}
+            data={Object.keys(decks)}
             keyExtractor={(item, index) => index}
             style={styles.deckList}
             renderItem={({item}) => {
               return (
                 <Animated.View style={{transform: [{scale: this.state.bounceValue}]}}>
                   <TouchableOpacity onPress={() => this.goToDeck(item)} style={styles.deck}>
-                    <Text style={styles.titleText}>{this.props.decks[item].title}</Text>
-                    <Text style={styles.cardNumberText}>({this.props.decks[item].questions.length} cards)</Text>
+                    <Text style={styles.titleText}>{decks[item].title}</Text>
+                    <Text style={styles.cardNumberText}>({decks[item].questions.length} cards)</Text>
                   </TouchableOpacity>
                 </Animated.View>
               )
@@ -54,7 +53,6 @@ class DeckList extends Component {
         </View>
       )
     }
-
   }
   render() {
     return (

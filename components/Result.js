@@ -20,9 +20,10 @@ class Result extends Component {
     navigation.state.params.onRestartQuiz({ index: 0, correct: 0, showAnswer: false })
   }
   render() {
+    const { navigation, deck } = this.props;
     return (
       <View style={{flex: 1}}>
-        <Text style={styles.scoreText}>{this.props.navigation.state.params.score / this.props.deck.questions.length * 100} points</Text>
+        <Text style={styles.scoreText}>{navigation.state.params.score / deck.questions.length * 100} points</Text>
         <TouchableOpacity onPress={() => this.restartQuiz()} style={{alignSelf: 'center', marginTop: 50}}>
           <Text style={styles.button}>Restart Quiz</Text>
         </TouchableOpacity>

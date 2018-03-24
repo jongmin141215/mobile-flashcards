@@ -16,10 +16,10 @@ export default function TextButton({ children, onPress, style = {} }) {
 const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
-    borderColor: '#ff0012',
+    borderColor: '#000',
     width: 200,
     height: 40,
-    backgroundColor: '#ff0012',
+    backgroundColor: '#000',
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',

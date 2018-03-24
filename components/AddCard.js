@@ -38,6 +38,7 @@ class AddCard extends Component {
     navigation.state.params.onGoBackToDeck({ addCard: true })
   }
   render() {
+    const { question, questionError, answer, answerError } = this.state;
     return (
       <View style={styles.container}>
         <View>
@@ -47,9 +48,9 @@ class AddCard extends Component {
           <TextInput
             style={styles.input}
             onChangeText={(question) => this.setState({ question })}
-            value={this.state.question}
+            value={question}
           />
-          {this.state.questionError && <Text style={{color: 'red'}}>{this.state.questionError}</Text>}
+          {questionError && <Text style={{color: 'red'}}>{questionError}</Text>}
         </View>
         <View>
           <Text style={styles.text}>
@@ -58,11 +59,11 @@ class AddCard extends Component {
           <TextInput
             style={styles.input}
             onChangeText={(answer) => this.setState({ answer })}
-            value={this.state.answer}
+            value={answer}
           />
-          {this.state.answerError && <Text style={{color: 'red'}}>{this.state.answerError}</Text>}
+          {answerError && <Text style={{color: 'red'}}>{answerError}</Text>}
         </View>
-        <TextButton style={{marginTop: 20}} onPress={() => this.onAddCard(this.props.deck.title, { question: this.state.question, answer: this.state.answer })}>
+        <TextButton style={{marginTop: 20}} onPress={() => this.onAddCard(this.props.deck.title, { question, answer })}>
           <Text>Add Card</Text>
         </TextButton>
       </View>

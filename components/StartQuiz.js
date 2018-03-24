@@ -10,7 +10,6 @@ class StartQuiz extends Component {
     showAnswer: false
   }
   onRestartQuiz = (newState) => {
-    console.log("onRestartQuiz", newState)
     this.setState(newState)
   }
   showQuestionAnswerToggle = () => {
@@ -45,22 +44,23 @@ class StartQuiz extends Component {
     })
   }
   toNextCard = () => {
-    if (this.state.index + 1 === this.props.deck.questions.length) {
+    const { deck, navigation } = this.props;
+    const { index, correct } = this.state;
+    if (index + 1 === deck.questions.length) {
       clearLocalNotification()
         .then(setLocalNotification)
-      this.props.navigation.navigate('Result', { score: this.state.correct, onRestartQuiz: this.onRestartQuiz });
+      navigation.navigate('Result', { score: correct, onRestartQuiz: this.onRestartQuiz });
     } else {
-      this.setState({index: this.state.index + 1})
+      this.setState({index: index + 1})
     }
   }
 
   render() {
-    console.log("Start quiz (decks): ", this.state)
     return (
       <View>
         {this.displayQuestionOrAnswer()}
         <TouchableOpacity onPress={() => this.markScore(1)} style={{alignSelf: 'center'}}>
-          <Text style={styles.button}>Correct</Text>
+          <Text style={[styles.button, {borderColor: '#1200ff', backgroundColor: '#1200ff'}]}>Correct</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.markScore(0)} style={{alignSelf: 'center'}}>
           <Text style={styles.button}>Incorrect</Text>

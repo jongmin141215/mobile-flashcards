@@ -26,20 +26,21 @@ class Deck extends Component {
     this.props.navigation.navigate('StartQuiz');
   }
   render() {
-    if (Object.keys(this.props.deck).length === 0) {
+    const { deck } = this.props;
+    if (Object.keys(deck).length === 0) {
       return <ActivityIndicator />
     } else {
       return (
         <View style={styles.container}>
           <View style={styles.deckHeader}>
-            <Text style={styles.deckHeaderText}>{this.props.deck.title}</Text>
-            <Text style={styles.deckSubHeaderText}>{this.props.deck.questions.length} cards</Text>
+            <Text style={styles.deckHeaderText}>{deck.title}</Text>
+            <Text style={styles.deckSubHeaderText}>{deck.questions.length} cards</Text>
           </View>
           <View style={styles.body}>
             <TouchableOpacity onPress={this.goToAddCard} style={{alignSelf: 'center'}}>
               <Text style={styles.button}>Add Card</Text>
             </TouchableOpacity>
-            {this.props.deck.questions.length !== 0 &&
+            {deck.questions.length !== 0 &&
               <TouchableOpacity onPress={this.goToStartQuiz} style={{alignSelf: 'center', marginTop: 10}}>
                 <Text style={styles.button}>Start Quiz</Text>
               </TouchableOpacity>
@@ -73,10 +74,10 @@ styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: '#ff0012',
+    borderColor: '#000',
     width: 200,
     height: 40,
-    backgroundColor: '#ff0012',
+    backgroundColor: '#000',
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
