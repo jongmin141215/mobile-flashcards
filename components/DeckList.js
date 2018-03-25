@@ -5,11 +5,13 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  Animated
+  Animated,
+  Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getDecks } from '../utils/api';
 import { fetchDecks } from '../actions';
+import { pluralizeCard } from '../utils/helpers';
 
 class DeckList extends Component {
   state = {
@@ -31,7 +33,7 @@ class DeckList extends Component {
   renderDeckList() {
     const { decks } = this.props;
     if (Object.keys(decks).length === 0) {
-      return <Text>Create flashcards by clicking “Add Deck”.</Text>
+      return <Text style={styles.noDeckText}>Create flashcards by clicking {Platform.OS === 'ios' ? '“Add Deck”' : '“ADD DECK”'}.</Text>
     } else {
       return (
         <View style={styles.container}>
@@ -44,7 +46,7 @@ class DeckList extends Component {
                 <Animated.View style={{transform: [{scale: this.state.bounceValue}]}}>
                   <TouchableOpacity onPress={() => this.goToDeck(item)} style={styles.deck}>
                     <Text style={styles.titleText}>{decks[item].title}</Text>
-                    <Text style={styles.cardNumberText}>({decks[item].questions.length} cards)</Text>
+                    <Text style={styles.cardNumberText}>({pluralizeCard(decks[item].questions.length)})</Text>
                   </TouchableOpacity>
                 </Animated.View>
               )
@@ -90,6 +92,13 @@ const styles = StyleSheet.create({
   cardNumberText: {
     fontSize: 15,
     color: "#888"
+  },
+  noDeckText: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 200,
+    marginLeft: 40,
+    marginRight: 40
   }
 })
 

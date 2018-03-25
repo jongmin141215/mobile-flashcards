@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-// Remove back button
+import { displayScores } from '../utils/helpers';
+// TODO Remove back button
 class Result extends Component {
   goBacktoDeck = () => {
     const { navigation } = this.props;
@@ -23,7 +24,7 @@ class Result extends Component {
     const { navigation, deck } = this.props;
     return (
       <View style={{flex: 1}}>
-        <Text style={styles.scoreText}>{navigation.state.params.score / deck.questions.length * 100} points</Text>
+        <Text style={styles.scoreText}>{displayScores(navigation.state.params.score / deck.questions.length * 100)} points</Text>
         <TouchableOpacity onPress={() => this.restartQuiz()} style={{alignSelf: 'center', marginTop: 50}}>
           <Text style={styles.button}>Restart Quiz</Text>
         </TouchableOpacity>
@@ -44,10 +45,10 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    borderColor: '#ff0012',
+    borderColor: '#000',
     width: 200,
     height: 40,
-    backgroundColor: '#ff0012',
+    backgroundColor: '#000',
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',

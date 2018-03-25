@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -52,7 +52,14 @@ const Tabs = TabNavigator({
       fontSize: 15,
       marginBottom: -20
     },
-    activeTintColor: '#000'
+    activeTintColor: '#000',
+    inactiveTintColor: '#999',
+    tabStyle: {
+      height: 60,
+    },
+    style: {
+      backgroundColor: '#eee'
+    }
   }
 })
 const MainNavigator = StackNavigator({

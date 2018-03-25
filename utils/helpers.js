@@ -7,7 +7,6 @@ export function clearLocalNotification() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
     .then(Notifications.cancelAllScheduledNotificationsAsync())
 }
-
 function createNotification() {
   return {
     title: 'Study FlashCards!',
@@ -23,7 +22,6 @@ function createNotification() {
     }
   }
 }
-
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
@@ -36,8 +34,8 @@ export function setLocalNotification() {
 
               let tomorrow = new Date();
               tomorrow.setDate(tomorrow.getDate() + 1);
-              tomorrow.setHours(8);
-              tomorrow.setMinutes(24);
+              tomorrow.setHours(20);
+              tomorrow.setMinutes(0);
 
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
@@ -51,4 +49,17 @@ export function setLocalNotification() {
           })
       }
     })
+}
+export function pluralizeCard(number) {
+  if (number === 1) {
+    return '1 card'
+  }
+  return `${number} cards`
+}
+export function displayScores(number) {
+  if (number % 1 === 0) {
+    return number;
+  } else {
+    return number.toFixed(2);
+  }
 }

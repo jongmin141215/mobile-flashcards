@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'rea
 import { connect } from 'react-redux';
 import { fetchDeck } from '../actions';
 import TextButton from './TextButton';
+import { pluralizeCard } from '../utils/helpers';
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -34,7 +35,7 @@ class Deck extends Component {
         <View style={styles.container}>
           <View style={styles.deckHeader}>
             <Text style={styles.deckHeaderText}>{deck.title}</Text>
-            <Text style={styles.deckSubHeaderText}>{deck.questions.length} cards</Text>
+            <Text style={styles.deckSubHeaderText}>{pluralizeCard(deck.questions.length)}</Text>
           </View>
           <View style={styles.body}>
             <TouchableOpacity onPress={this.goToAddCard} style={{alignSelf: 'center'}}>

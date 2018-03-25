@@ -6,8 +6,10 @@ function decks(state = {}, action) {
     case RECEIVE_DECKS:
       return { ...state, ...action.decks }
     case ADD_DECK:
+    console.log("reducer add deck", action.deckTitle)
       return {...state, [action.deckTitle]: {title: action.deckTitle, questions: []}};
     case ADD_CARD:
+    console.log("reducer add card", action.card)
       return { ...state, [action.title]: {title: [action.title], questions: [...state[action.title].questions, { question: action.card.question, answer: action.card.answer }]}}
     default:
       return state;
