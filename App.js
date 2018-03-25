@@ -35,7 +35,7 @@ const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Decks',
       tabBarLabel: 'Decks',
-      tabBarIcon: () => <MaterialCommunityIcons name='cards' size={30} style={{marginBottom: -10}} />
+      tabBarIcon: () => <MaterialCommunityIcons name='cards' size={Platform.OS === 'ios' ? 30 : 20} style={{marginBottom: -10}} />
     }
   },
   AddDeck: {
@@ -43,15 +43,16 @@ const Tabs = TabNavigator({
     navigationOptions: {
       title: 'Add Deck',
       tabBarLabel: 'Add Deck',
-      tabBarIcon: () => <Ionicons name='ios-create' size={30} style={{marginBottom: -10}} />
+      tabBarIcon: () => <Ionicons name='ios-create' size={Platform.OS === 'ios' ? 30 : 20} style={{marginBottom: -10}} />
     }
   }
 }, {
   tabBarOptions: {
     labelStyle: {
-      fontSize: 15,
-      marginBottom: -20
+      fontSize: Platform.OS === 'ios' ? 15 : 12,
+      marginBottom: Platform.OS === 'ios' ? -20 : 0
     },
+    showIcon: true,
     activeTintColor: '#000',
     inactiveTintColor: '#999',
     tabStyle: {
@@ -59,6 +60,7 @@ const Tabs = TabNavigator({
     },
     style: {
       backgroundColor: '#eee'
+
     }
   }
 })
