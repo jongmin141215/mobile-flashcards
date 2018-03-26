@@ -12,25 +12,25 @@ You can take quizzes and get scores!
 ![add deck](/public/images/addDeck.png)
 
 ### Deck screen (with no cards)
-![deck with no cards](/public/images/deckWithNoCards)
+![deck with no cards](/public/images/deckWithNoCards.png)
 
 ### AddCard screen
-![add card](/public/images/addCard)
+![add card](/public/images/addCard.png)
 
 ### Deck screen (with cards)
-![deck with cards](/public/images/deckWithCards)
+![deck with cards](/public/images/deckWithCards.png)
 
 ### DeckList screen (with decks)
-![deck list with decks](/public/images/deckListWithDecks)
+![deck list with decks](/public/images/deckListWithDecks.png)
 
 ### Quiz screen
-![quiz](/public/images/quiz)
+![quiz](/public/images/quiz.png)
 
 ### Answer screen
-![answer](/public/images/answer)
+![answer](/public/images/answer.png)
 
 ### Result screen
-![result](/public/images/results)
+![result](/public/images/results.png)
 
 ### Getting Started
 
