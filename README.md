@@ -1,8 +1,8 @@
 ## UdaciCards: a mobile application (Android and iOS) that allows users to study collections of flashcards.
----
-You can create a deck of flashcards.
-You can add as many cards as you want to a deck.
-You can take quizzes and get scores!
+
+You can create a deck of flashcards.  
+You can add as many cards as you want to a deck.  
+You can take quizzes and get scores!  
 
 
 ### DeckList screen (with no decks)
