@@ -42,4 +42,4 @@ $ npm start
 ```
 Follow instructions below.
 
-![instructions](/public/images/instructions)
+![instructions](/public/images/instructions.png)
