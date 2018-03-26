@@ -6,7 +6,7 @@ You can take quizzes and get scores!
 
 
 ### DeckList screen (with no decks)
-![deck list with no decks](/public/images/deckListWithNoDecks.png)
+![deck list with no decks](/public/deckListWithNoDecks.png)
 
 ### AddDeck screen
 ![add deck](/public/images/addDeck.png)
