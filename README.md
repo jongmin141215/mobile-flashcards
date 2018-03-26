@@ -4,10 +4,6 @@ You can create a deck of flashcards.
 You can add as many cards as you want to a deck.  
 You can take quizzes and get scores!  
 
-
-### DeckList screen (with no decks)
-![deck list with no decks](/public/deckListWithNoDecks.png)
-
 ### AddDeck screen
 ![add deck](/public/images/addDeck.png)
 
